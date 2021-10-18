@@ -8,6 +8,11 @@ def sortList(L):
     while len(L) > 0:
         sL.append(searchMinFromList(L)[0]) # add min value to sorted list
         L.remove(searchMinFromList(L)[0])# delete the min value from original list
+        '''another way to do this could be
+        minNum,idx = searchMinFromList(L)
+        sL.append(minNum)
+        del L(idx)
+        '''
         
     return sL
 
@@ -23,7 +28,7 @@ def searchMinFromList(L):
         else:
             pass
             
-    return minValue,counter
+    return minValue,idx
 
 print(sortList(L)) #test
 
