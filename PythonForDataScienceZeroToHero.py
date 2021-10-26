@@ -885,7 +885,7 @@ L3
 '''Why Numpy? Numpy is Faster''' 
 
 
-# In[3]:
+# In[2]:
 
 
 import numpy as np
@@ -1013,7 +1013,7 @@ np.reshape
 # In[4]:
 
 
-A = np.arange(100)
+A = np.arange(100) # generate an array from 0 to 99
 
 
 # In[5]:
@@ -1086,6 +1086,948 @@ np.random.randint(0,10)
 
 
 np.random.randint(0,10)
+
+
+# In[17]:
+
+
+A = np.random.rand(100) # generate 100 random number
+
+
+# In[18]:
+
+
+print(A)
+
+
+# In[19]:
+
+
+get_ipython().run_line_magic('pinfo', 'np.random.rand')
+
+
+# In[20]:
+
+
+import matplotlib.pyplot as plt
+
+
+# In[22]:
+
+
+plt.hist(A,bins=100)
+
+
+# In[24]:
+
+
+get_ipython().run_line_magic('pinfo', 'np.random.randn')
+
+
+# In[25]:
+
+
+B = np.random.randn(10000)
+
+
+# In[29]:
+
+
+plt.hist(B,bins=200)
+
+
+# In[30]:
+
+
+D = np.arange(100).reshape(5,20) # reshape the array to required dimension
+
+
+# In[31]:
+
+
+D.shape
+
+
+# In[32]:
+
+
+print(D)
+
+
+# In[1]:
+
+
+# Slicing Array[start:end:step]
+
+
+# In[3]:
+
+
+A = np.arange(10)
+
+
+# In[4]:
+
+
+A
+
+
+# In[5]:
+
+
+A[1:5]
+
+
+# In[6]:
+
+
+A[0:5]
+
+
+# In[7]:
+
+
+A[:5] == A[0:5]
+
+
+# In[8]:
+
+
+B = A[3:7]
+
+
+# In[9]:
+
+
+B
+
+
+# In[10]:
+
+
+B[0] = -10
+
+
+# In[11]:
+
+
+B
+
+
+# In[12]:
+
+
+A
+
+
+# In[13]:
+
+
+'''
+Array A and B points to the same reference (memory)
+change A or B will affect each other
+'''
+
+
+# In[14]:
+
+
+B = A[3:7].copy() 
+# this will assign different memory to store Array
+
+
+# In[15]:
+
+
+B
+
+
+# In[16]:
+
+
+B[0]=3
+
+
+# In[17]:
+
+
+B
+
+
+# In[18]:
+
+
+A
+
+
+# In[19]:
+
+
+A[::-1]
+
+
+# In[20]:
+
+
+A[::-3]
+
+
+# In[25]:
+
+
+np.argwhere(A==-10) # return the index of the element
+
+
+# In[31]:
+
+
+np.argwhere(A==10)
+
+
+# In[34]:
+
+
+idx = np.argwhere(A==10)
+
+
+# In[35]:
+
+
+idx
+
+
+# In[38]:
+
+
+np.shape(idx)
+
+
+# In[39]:
+
+
+A[3]
+
+
+# In[40]:
+
+
+A = np.round(10*np.random.rand(5,4))
+
+
+# In[41]:
+
+
+A
+
+
+# In[42]:
+
+
+A[1,2]
+
+
+# In[43]:
+
+
+A[1,:]
+
+
+# In[44]:
+
+
+A[:,2]
+
+
+# In[45]:
+
+
+A[0:1,0:1]
+
+
+# In[46]:
+
+
+A[0:2,0:2]
+
+
+# In[48]:
+
+
+A[2:4,0:2]
+
+
+# In[49]:
+
+
+A
+
+
+# In[54]:
+
+
+A.sort(axis=0) # sort by column
+
+
+# In[55]:
+
+
+A
+
+
+# In[56]:
+
+
+A.sort(axis=1) # sort by row
+
+
+# In[57]:
+
+
+A
+
+
+# In[58]:
+
+
+# Numpy Indexing
+
+
+# In[59]:
+
+
+A
+
+
+# In[60]:
+
+
+A[A<6]
+
+
+# In[61]:
+
+
+A=np.arange(100)
+
+
+# In[68]:
+
+
+B=A[[3,5,6]] # double [[]] means copy rather than pointing to the same memory
+
+
+# In[63]:
+
+
+A
+
+
+# In[64]:
+
+
+B
+
+
+# In[65]:
+
+
+B[0]=-4
+
+
+# In[66]:
+
+
+B
+
+
+# In[67]:
+
+
+A
+
+
+# In[69]:
+
+
+B = A[A<40]
+
+
+# In[70]:
+
+
+B
+
+
+# In[71]:
+
+
+C = A[(A<40) & (A>30)]
+
+
+# In[72]:
+
+
+C
+
+
+# In[73]:
+
+
+# & for array, 'and' for single objects
+# |, or
+# ~, not
+
+
+# In[74]:
+
+
+# Broadcasting
+
+
+# In[76]:
+
+
+A = np.array([[1,2],[3,5]])
+
+
+# In[77]:
+
+
+A
+
+
+# In[78]:
+
+
+A = A+5
+
+
+# In[79]:
+
+
+A
+
+
+# In[80]:
+
+
+A = A + [1,2]
+
+
+# In[81]:
+
+
+A
+
+
+# In[83]:
+
+
+A = A + [[1],[2]]
+
+
+# In[84]:
+
+
+A
+
+
+# In[86]:
+
+
+# np.hstack horrizontal stack
+# np.vstack vertical stack
+# np.sort(axis = 0)
+
+
+# In[87]:
+
+
+A = np.round(10*np.random.rand(2,3))
+
+
+# In[88]:
+
+
+A
+
+
+# In[89]:
+
+
+B = np.round(20*np.random.rand(2,2))
+
+
+# In[90]:
+
+
+B
+
+
+# In[95]:
+
+
+C = np.hstack((A,B))
+
+
+# In[96]:
+
+
+C
+
+
+# In[99]:
+
+
+D = np.round(30*np.random.rand(5))
+
+
+# In[100]:
+
+
+D
+
+
+# In[101]:
+
+
+E = np.vstack((C,D))
+
+
+# In[102]:
+
+
+E
+
+
+# In[103]:
+
+
+# speed:ufuncs
+
+
+# In[104]:
+
+
+b = np.random.rand(1000000)
+
+
+# In[105]:
+
+
+get_ipython().run_line_magic('timeit', 'sum(b)')
+
+
+# In[106]:
+
+
+get_ipython().run_line_magic('timeit', 'np.sum(b) # same as B.sum()')
+
+
+# In[107]:
+
+
+# np.sum() is 100 times faster than sum()
+
+
+# In[108]:
+
+
+def mySum(G):
+    s = 0
+    for x in G:
+        s+=x
+    return s
+
+
+# In[109]:
+
+
+get_ipython().run_line_magic('timeit', 'mySum(b)')
+
+
+# # Pandas
+
+# In[113]:
+
+
+import pandas as pd
+
+
+# In[115]:
+
+
+print(pd._version)
+
+
+# In[116]:
+
+
+pd.__version__
+
+
+# In[117]:
+
+
+A = pd.Series([2,3,4,5],index = ['a','b','c','d'])
+
+
+# In[118]:
+
+
+A.values
+
+
+# In[120]:
+
+
+type(A.values) # numpy array
+
+
+# In[121]:
+
+
+type(A) # pandas
+
+
+# In[122]:
+
+
+A.index
+
+
+# In[123]:
+
+
+A['a']
+
+
+# In[124]:
+
+
+A['a':'c'] # slicing using index
+
+
+# In[125]:
+
+
+# Series
+
+
+# In[126]:
+
+
+grade_dict = {'A':4,'A-':3.5,'B':3,'B-':2.5,'B':2}
+grades = pd.Series(grade_dict)
+
+
+# In[127]:
+
+
+grades.values
+
+
+# In[128]:
+
+
+marks_dict = {'A':85,'B':75,'C':65,'D':55}
+marks = pd.Series(marks_dict)
+
+
+# In[129]:
+
+
+marks
+
+
+# In[130]:
+
+
+marks['A']
+
+
+# In[131]:
+
+
+marks[:2]
+
+
+# In[132]:
+
+
+type(marks)
+
+
+# In[133]:
+
+
+grades # 'B' has been overwritten
+
+
+# In[134]:
+
+
+# DataFrame
+
+
+# In[135]:
+
+
+D = pd.DataFrame({'Marks':marks,'Grades':grades})
+
+
+# In[136]:
+
+
+D
+
+
+# In[137]:
+
+
+D.T
+
+
+# In[138]:
+
+
+D.values
+
+
+# In[139]:
+
+
+D.values[1,1]
+
+
+# In[140]:
+
+
+D.columns
+
+
+# In[141]:
+
+
+D
+
+
+# In[142]:
+
+
+D['ScaledMarks'] = D['Marks']*1.5
+
+
+# In[143]:
+
+
+D
+
+
+# In[144]:
+
+
+del D['ScaledMarks']
+
+
+# In[145]:
+
+
+D
+
+
+# In[146]:
+
+
+G = D[D['Marks']>70]
+
+
+# In[147]:
+
+
+G
+
+
+# In[149]:
+
+
+D.values[1,0]
+
+
+# In[150]:
+
+
+type(D.values[1,0])
+
+
+# In[151]:
+
+
+# NaN is float64?
+
+
+# In[152]:
+
+
+A = pd.DataFrame([{'a':1,'b':4},{'b':-3,'c':9}])
+
+
+# In[153]:
+
+
+A
+
+
+# In[154]:
+
+
+A.fillna(0) # fill nan with 0
+
+
+# In[159]:
+
+
+A.dropna
+
+
+# In[160]:
+
+
+A = pd.Series(['a','b','c'],index = [1,3,5])
+
+
+# In[161]:
+
+
+A[1] # explicit index, or loc
+
+
+# In[163]:
+
+
+A[1:3] # implict index, or iloc
+
+
+# In[164]:
+
+
+A.loc[1:3] # explicit index
+
+
+# In[165]:
+
+
+A.iloc[1:3] # implict index 
+
+
+# In[166]:
+
+
+D
+
+
+# In[168]:
+
+
+D.iloc[2,:]
+
+
+# In[169]:
+
+
+D.loc['A']
+
+
+# In[170]:
+
+
+D.iloc['A']
+
+
+# In[171]:
+
+
+# deal with csv files
+
+
+# In[172]:
+
+
+import pandas as pd
+import numpy as np
+from sklearn.impute import SimpleImputer
+
+
+# In[173]:
+
+
+df = pd.read_csv('/Users/yuanni/Documents/Python/covid_19_data.csv')
+
+
+# In[174]:
+
+
+df.head() # showing top 5 items by default
+
+
+# In[175]:
+
+
+df.drop(['SNo','Last Update'],axis=1,inplace=True)
+
+
+# In[176]:
+
+
+df.head()
+
+
+# In[178]:
+
+
+df.rename(columns={'ObservationDate':'Date','Province/State':'Province'},inplace=True)
+
+
+# In[179]:
+
+
+df.head()
+
+
+# In[180]:
+
+
+df['Date'] = pd.to_datetime(df['Date'])
+
+
+# In[181]:
+
+
+df.head()
+
+
+# In[185]:
+
+
+df.describe()
+
+
+# In[186]:
+
+
+df.info()
+
+
+# In[189]:
+
+
+df = df.fillna('NA')
+
+
+# In[190]:
+
+
+df.info()
 
 
 # In[ ]:
