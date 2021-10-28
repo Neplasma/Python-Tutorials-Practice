@@ -1950,7 +1950,7 @@ D.iloc['A']
 # deal with csv files
 
 
-# In[172]:
+# In[31]:
 
 
 import pandas as pd
@@ -1958,7 +1958,7 @@ import numpy as np
 from sklearn.impute import SimpleImputer
 
 
-# In[173]:
+# In[32]:
 
 
 df = pd.read_csv('/Users/yuanni/Documents/Python/covid_19_data.csv')
@@ -1970,7 +1970,7 @@ df = pd.read_csv('/Users/yuanni/Documents/Python/covid_19_data.csv')
 df.head() # showing top 5 items by default
 
 
-# In[175]:
+# In[9]:
 
 
 df.drop(['SNo','Last Update'],axis=1,inplace=True)
@@ -1982,7 +1982,7 @@ df.drop(['SNo','Last Update'],axis=1,inplace=True)
 df.head()
 
 
-# In[178]:
+# In[34]:
 
 
 df.rename(columns={'ObservationDate':'Date','Province/State':'Province'},inplace=True)
@@ -1994,7 +1994,7 @@ df.rename(columns={'ObservationDate':'Date','Province/State':'Province'},inplace
 df.head()
 
 
-# In[180]:
+# In[35]:
 
 
 df['Date'] = pd.to_datetime(df['Date'])
@@ -2018,7 +2018,7 @@ df.describe()
 df.info()
 
 
-# In[189]:
+# In[36]:
 
 
 df = df.fillna('NA')
@@ -2028,6 +2028,114 @@ df = df.fillna('NA')
 
 
 df.info()
+
+
+# In[10]:
+
+
+df.head(10)
+
+
+# In[37]:
+
+
+df2 = df.groupby('Country/Region')[['Country/Region','Confirmed','Deaths','Recovered']].sum().reset_index()
+
+
+# In[12]:
+
+
+df2
+
+
+# In[14]:
+
+
+df2.head(20)
+
+
+# In[61]:
+
+
+df3 = df.groupby(['Country/Region','Date'])[['Country/Region','Date','Confirmed','Deaths','Recovered']].sum().reset_index()
+
+
+# In[69]:
+
+
+df3.head(10)
+
+
+# # Matplotlib
+
+# In[44]:
+
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+# In[21]:
+
+
+x = np.linspace(0,10,1000) # (start, end, points)
+y = np.sin(x)
+plt.plot(x,y)
+
+
+# In[27]:
+
+
+plt.scatter(x[::30],y[::30],color='green')
+
+
+# In[30]:
+
+
+plt.plot(x,np.sin(x),color='red')
+plt.plot(x,np.cos(x),color='yellow')
+
+
+# In[73]:
+
+
+country = df3['Country/Region'].unique()
+len(country)
+
+
+# In[74]:
+
+
+for idx in range(0,len(country)):
+    C = df3[df3['Country/Region']==country[idx]].reset_index()
+    plt.scatter(np.arange(0,len(C)),C['Confirmed'],color='blue',label='Confirmed')
+    plt.scatter(np.arange(0,len(C)),C['Recovered'],color='green',label='Recovered')
+    plt.scatter(np.arange(0,len(C)),C['Deaths'],color='red',label='Deaths')
+    plt.title(country[idx])
+    plt.xlabel('Days since the first suspect')
+    plt.ylabel('Number of cases')
+    plt.legend()
+    plt.show()
+
+
+# In[75]:
+
+
+df4 = df3.groupby(['Date'])[['Date','Confirmed','Deaths','Recovered']].sum().reset_index()
+
+
+# In[77]:
+
+
+C = df4
+plt.bar(np.arange(0,len(C)),C['Confirmed'],color='blue',label='Confirmed')
+plt.bar(np.arange(0,len(C)),C['Recovered'],color='green',label='Recovered')
+plt.bar(np.arange(0,len(C)),C['Deaths'],color='red',label='Deaths')
+plt.title('World')
+plt.xlabel('Days since the first suspect')
+plt.ylabel('Number of cases')
+plt.legend()
+plt.show()
 
 
 # In[ ]:
